@@ -12,8 +12,5 @@ body {
 }
 
 body {
-  display: grid;
-  place-items: center;
-  text-align: center;
   background: #dde1e7;
 }

@@ -1,6 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 .container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.login {
   width: 330px;
   background: #dde1e7;
   border-radius: 10px;
