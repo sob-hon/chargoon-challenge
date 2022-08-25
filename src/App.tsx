@@ -1,16 +1,10 @@
-import React, { useEffect } from "react";
-import { getData, insertData } from "./firebase/transportLayer";
+import React, { FormEvent, useEffect, useState } from "react";
+import { getData } from "./firebase/transportLayer";
+import "./App.css";
+import Login from "./components/Login/Login";
 
 function App() {
-  useEffect(() => {
-    getData().then((data) => console.log(data));
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>Empty project</h1>
-    </div>
-  );
+  return <Login />;
 }
 
 export default App;
