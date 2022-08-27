@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useLayoutEffect, useState } from "react";
 import { getData } from "../../firebase/transportLayer";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Login = () => {
   interface User {
@@ -14,7 +15,8 @@ const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [users, setUsers] = useState<User[]>([]);
-  let navigate = useNavigate();
+  const [token, setToken] = useLocalStorage<string>("token", "");
+  const navigate = useNavigate();
 
   console.log(users);
 
@@ -32,7 +34,7 @@ const Login = () => {
     console.log("state of user", authenticated);
     if (authenticated !== undefined) {
       navigate("/");
-      window.localStorage.setItem("token", authenticated.id);
+      setToken(authenticated.id);
     }
   };
 
