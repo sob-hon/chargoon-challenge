@@ -16,6 +16,8 @@ const Login = () => {
   const [users, setUsers] = useState<User[]>([]);
   let navigate = useNavigate();
 
+  console.log(users);
+
   useEffect(() => {
     if (!window.localStorage.getItem("token")) {
       getData().then((data: any) => setUsers(data));
