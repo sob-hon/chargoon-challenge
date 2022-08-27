@@ -23,6 +23,11 @@ thead th {
   background-color: #087f5b;
   color: #fff;
   width: 25%;
+  cursor: pointer;
+}
+
+th span {
+  margin-left: 10px;
 }
 
 tbody tr:nth-child(even) {
@@ -31,4 +36,72 @@ tbody tr:nth-child(even) {
 
 tbody tr:nth-child(odd) {
   background-color: #e9ecef;
+}
+
+/* Arrow styling */
+
+.arrow-icon {
+  /* background-color: lightcoral; */
+  height: 10px;
+  width: 40px;
+  display: inline;
+  padding: 0.5em;
+  margin: 1em auto;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.left-bar {
+  position: absolute;
+  background-color: transparent;
+  top: 17px;
+  left: -22px;
+  width: 40px;
+  height: 10px;
+  display: block;
+  transform: rotate(35deg);
+  float: right;
+  border-radius: 2px;
+}
+.left-bar:after {
+  content: "";
+  background-color: white;
+  width: 20px;
+  height: 6px;
+  display: block;
+  float: right;
+  border-radius: 6px 10px 10px 6px;
+  transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+  z-index: -1;
+}
+.right-bar {
+  position: absolute;
+  background-color: transparent;
+  top: 28px;
+  left: -6px;
+  width: 40px;
+  height: 10px;
+  display: block;
+  transform: rotate(-35deg);
+  float: right;
+  border-radius: 2px;
+}
+.right-bar:after {
+  content: "";
+  background-color: white;
+  width: 20px;
+  height: 6px;
+  display: block;
+  float: right;
+  border-radius: 10px 6px 6px 10px;
+  transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+  z-index: -1;
+}
+.open .left-bar:after {
+  transform-origin: center center;
+  transform: rotate(-70deg);
+}
+.open .right-bar:after {
+  transform-origin: center center;
+  transform: rotate(70deg);
 }

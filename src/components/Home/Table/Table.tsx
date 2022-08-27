@@ -1,33 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getData } from "../../../firebase/transportLayer";
 import "./table.css";
 
 const Table = () => {
+  interface User {
+    description: string;
+    password: string;
+    fullname: string;
+    id: string;
+  }
+  const [users, setUsers] = useState<User[]>([]);
+  const [arrow, setArrow] = useState(false);
+
+  useEffect(() => {
+    getData().then((data: any) => setUsers(data));
+  }, []);
+
   return (
     <div className="table-container">
       <table>
         <thead>
           <tr>
-            <th> Chair </th>
-            <th> The Laid Back</th>
+            <th onClick={() => setArrow(!arrow)}>
+              Name
+              <div className={`arrow-icon ${arrow ? "" : "open"}`}>
+                <span className="left-bar"></span>
+                <span className="right-bar"></span>
+              </div>
+            </th>
+            <th>
+              Description
+              <div className={`arrow-icon ${arrow ? "" : "open"}`}>
+                <span className="left-bar"></span>
+                <span className="right-bar"></span>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th> Width </th>
-            <td> 80 cm </td>
-          </tr>
-          <tr>
-            <th> Depth </th>
-            <td> 70 cm </td>
-          </tr>
-          <tr>
-            <th> Weight </th>
-            <td> 16 kg </td>
-          </tr>
-          <tr>
-            <th> Height </th>
-            <td> 120 cm </td>
-          </tr>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <th> {user.fullname} </th>
+              <td> {user.description} </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
