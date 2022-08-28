@@ -3,15 +3,14 @@ import { getData } from "../../firebase/transportLayer";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import useLocalStorage from "../../hooks/useLocalStorage";
+interface User {
+  description: string;
+  password: string;
+  fullname: string;
+  id: string;
+}
 
 const Login = () => {
-  interface User {
-    description: string;
-    password: string;
-    fullname: string;
-    id: string;
-  }
-
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [users, setUsers] = useState<User[]>([]);

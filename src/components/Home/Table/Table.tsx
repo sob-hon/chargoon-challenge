@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { getData } from "../../../firebase/transportLayer";
+import { getData, deleteData } from "../../../firebase/transportLayer";
+import Modal from "../../Modal/Modal";
 import "./table.css";
+interface User {
+  description: string;
+  password: string;
+  fullname: string;
+  id: string;
+}
 
 const Table = () => {
-  interface User {
-    description: string;
-    password: string;
-    fullname: string;
-    id: string;
-  }
   const [users, setUsers] = useState<User[]>([]);
   const [arrow, setArrow] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User>();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState("view");
 
   useEffect(() => {
     getData().then((data: any) => setUsers(data));
@@ -35,8 +38,34 @@ const Table = () => {
     setSelectedUser(user);
   };
 
+  const viewBtnClickedHandler = () => {
+    setModalOpen(true);
+    setModalType("view");
+  };
+
+  const addBtnClickedHandler = () => {
+    setModalOpen(true);
+    setModalType("add");
+  };
+
+  const deleteBtnClickedHandler = () => {
+    if (selectedUser) {
+      setUsers((prevUsers) => {
+        return prevUsers.filter((user) => user.id !== selectedUser.id);
+      });
+      deleteData(selectedUser.id);
+    }
+  };
+
   return (
     <>
+      {modalOpen && (
+        <Modal
+          setModalOpen={setModalOpen}
+          modalType={modalType}
+          selectedUser={selectedUser}
+        />
+      )}
       <div className="table-container">
         <table>
           <thead>
@@ -63,9 +92,15 @@ const Table = () => {
       </div>
 
       <div className="btn-container">
-        <button className="table-btn">View</button>
-        <button className="table-btn">Add</button>
-        <button className="table-btn">Delete</button>
+        <button className="table-btn" onClick={viewBtnClickedHandler}>
+          View
+        </button>
+        <button className="table-btn" onClick={addBtnClickedHandler}>
+          Add
+        </button>
+        <button className="table-btn" onClick={deleteBtnClickedHandler}>
+          Delete
+        </button>
       </div>
     </>
   );
