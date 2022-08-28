@@ -6,7 +6,7 @@ interface User {
   description: string;
   password: string;
   fullname: string;
-  id: string;
+  id?: string;
 }
 
 const Table = () => {
@@ -29,8 +29,7 @@ const Table = () => {
       if (arrow) {
         sortedUsers = sortedUsers.reverse();
       }
-      console.log("sorted users are: ", sortedUsers);
-      return sortedUsers;
+      return prevUsers;
     });
   };
 
@@ -48,12 +47,12 @@ const Table = () => {
     setModalType("add");
   };
 
-  const deleteBtnClickedHandler = () => {
+  const deleteBtnClickedHandler = async () => {
     if (selectedUser) {
       setUsers((prevUsers) => {
         return prevUsers.filter((user) => user.id !== selectedUser.id);
       });
-      deleteData(selectedUser.id);
+      await deleteData(selectedUser?.id);
     }
   };
 
@@ -64,6 +63,7 @@ const Table = () => {
           setModalOpen={setModalOpen}
           modalType={modalType}
           selectedUser={selectedUser}
+          setUsers={setUsers}
         />
       )}
       <div className="table-container">

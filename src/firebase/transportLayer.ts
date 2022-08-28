@@ -8,7 +8,7 @@ import {
 import { collectionRef, getDoc } from './index';
 
 export interface User {
-	id: string;
+	id?: string;
 	fullname: string;
 	password: string;
 	description: string;
@@ -36,7 +36,7 @@ export function insertData(data: User) {
 	});
 }
 
-export function deleteData(id: string) {
+export function deleteData(id: string | undefined) {
 	return new Promise((resolve, reject) => {
 		deleteDoc(getDoc(id))
 			.then(() => {

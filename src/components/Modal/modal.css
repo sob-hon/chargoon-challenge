@@ -54,7 +54,7 @@
 
 .fullname-wrapper {
   display: flex;
-  gap: 20px;
+  gap: 60px;
 }
 
 .fullname-content {
@@ -62,13 +62,32 @@
   margin-top: 5px;
   word-break: break-all;
   max-width: 60%;
+  text-align: left;
 }
 
+.password-wrapper,
 .description-wrapper {
   margin-top: 20px;
   display: flex;
-  gap: 50px;
+  gap: 35px;
   text-align: left;
+}
+
+.input-text {
+  outline: none;
+  border: 0.2px solid black;
+  border-radius: 15px;
+  padding-inline: 20px;
+  color: rgba(0, 0, 0, 0.651);
+}
+
+.description-wrapper .input-text{
+  height: 80px;
+  width: 45%;
+}
+
+.password-wrapper {
+  gap: 50px;
 }
 
 .description-content {
