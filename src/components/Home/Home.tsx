@@ -19,8 +19,13 @@ function Home() {
 
   return (
     <>
-      <Table />
-      <AutoComplete options={users}/>
+      <Table
+        rows={users}
+        setRows={setUsers}
+        headers={["Name", "Description"]}
+        filteredHeaders={["Name"]}
+      />
+      <AutoComplete options={users} />
     </>
   );
 }

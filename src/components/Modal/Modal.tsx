@@ -1,13 +1,6 @@
 import React, { SetStateAction, useState } from "react";
-import { getData, insertData } from "../../firebase/transportLayer";
+import { getData, insertData, User } from "../../firebase/transportLayer";
 import "./modal.css";
-
-interface User {
-  description: string;
-  password: string;
-  fullname: string;
-  id?: string;
-}
 
 interface Props {
   setModalOpen: (value: boolean) => void;

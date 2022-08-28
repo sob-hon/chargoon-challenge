@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { getData, deleteData, User } from "../../../firebase/transportLayer";
+import React, { useState } from "react";
+import { deleteData, User } from "../../../firebase/transportLayer";
 import Modal from "../../Modal/Modal";
 import "./table.css";
 
-const Table = () => {
-  const [users, setUsers] = useState<User[]>([]);
+interface Props {
+  rows: User[];
+  headers: string[];
+  setRows: React.Dispatch<React.SetStateAction<User[]>>;
+  filteredHeaders: string[];
+}
+
+const Table: React.FC<Props> = ({
+  rows,
+  headers,
+  setRows,
+  filteredHeaders,
+}) => {
   const [arrow, setArrow] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User>();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState("view");
 
-  useEffect(() => {
-    getData().then((data: any) => setUsers(data));
-  }, []);
-
   const nameSortClickedHandler = () => {
     setArrow(!arrow);
-    setUsers((prevUsers) => {
+    setRows((prevUsers) => {
       let sortedUsers = prevUsers.sort((a, b) =>
         a.fullname.toLowerCase() > b.fullname.toLowerCase() ? 1 : -1
       );
@@ -41,12 +48,12 @@ const Table = () => {
     setModalType("add");
   };
 
-  const deleteBtnClickedHandler = async () => {
+  const deleteBtnClickedHandler = () => {
     if (selectedUser) {
-      setUsers((prevUsers) => {
+      setRows((prevUsers) => {
         return prevUsers.filter((user) => user.id !== selectedUser.id);
       });
-      await deleteData(selectedUser?.id);
+      deleteData(selectedUser?.id);
     }
   };
 
@@ -57,25 +64,30 @@ const Table = () => {
           setModalOpen={setModalOpen}
           modalType={modalType}
           selectedUser={selectedUser}
-          setUsers={setUsers}
+          setUsers={setRows}
         />
       )}
       <div className="table-container">
         <table>
           <thead>
             <tr>
-              <th onClick={nameSortClickedHandler}>
-                Name
-                <div className={`arrow-icon ${arrow ? "" : "open"}`}>
-                  <span className="left-bar"></span>
-                  <span className="right-bar"></span>
-                </div>
-              </th>
-              <th>Description</th>
+              {headers.map((header) =>
+                filteredHeaders.some((head) => head === header) ? (
+                  <th onClick={nameSortClickedHandler}>
+                    {header}
+                    <div className={`arrow-icon ${arrow ? "" : "open"}`}>
+                      <span className="left-bar"></span>
+                      <span className="right-bar"></span>
+                    </div>
+                  </th>
+                ) : (
+                  <th>{header}</th>
+                )
+              )}
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {rows.map((user) => (
               <tr key={user.id} onClick={() => userClickedHandler(user)}>
                 <th> {user.fullname} </th>
                 <td> {user.description} </td>
