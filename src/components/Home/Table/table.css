@@ -106,6 +106,15 @@ tbody tr:nth-child(odd) {
   transform: rotate(70deg);
 }
 
+.selectedUser {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.selectedUser-content {
+  font-weight: 900;
+}
+
 .btn-container {
   display: flex;
   margin-top: 25px;

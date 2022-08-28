@@ -85,6 +85,19 @@ const Table = () => {
         </table>
       </div>
 
+      <div className="selectedUser">
+        {selectedUser ? (
+          <p>
+            Selected user is:{" "}
+            <span className="selectedUser-content">
+              {selectedUser?.fullname}
+            </span>
+          </p>
+        ) : (
+          <p></p>
+        )}
+      </div>
+
       <div className="btn-container">
         <button className="table-btn" onClick={viewBtnClickedHandler}>
           View
