@@ -16,25 +16,33 @@ const Table = () => {
     getData().then((data: any) => setUsers(data));
   }, []);
 
+  const nameSortClickedHandler = () => {
+    setArrow(!arrow);
+    setUsers((prevUsers) => {
+      let sortedUsers = prevUsers.sort((a, b) =>
+        a.fullname.toLowerCase() > b.fullname.toLowerCase() ? 1 : -1
+      );
+      if (arrow) {
+        sortedUsers = sortedUsers.reverse();
+      }
+      console.log("sorted users are: ", sortedUsers);
+      return sortedUsers;
+    });
+  };
+
   return (
     <div className="table-container">
       <table>
         <thead>
           <tr>
-            <th onClick={() => setArrow(!arrow)}>
+            <th onClick={nameSortClickedHandler}>
               Name
               <div className={`arrow-icon ${arrow ? "" : "open"}`}>
                 <span className="left-bar"></span>
                 <span className="right-bar"></span>
               </div>
             </th>
-            <th>
-              Description
-              <div className={`arrow-icon ${arrow ? "" : "open"}`}>
-                <span className="left-bar"></span>
-                <span className="right-bar"></span>
-              </div>
-            </th>
+            <th>Description</th>
           </tr>
         </thead>
         <tbody>
