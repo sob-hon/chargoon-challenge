@@ -84,6 +84,7 @@
 .description-wrapper .input-text{
   height: 80px;
   width: 45%;
+  padding-block: 5px;
 }
 
 .password-wrapper {

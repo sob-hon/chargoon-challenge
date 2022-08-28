@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getData, deleteData } from "../../../firebase/transportLayer";
+import { getData, deleteData, User } from "../../../firebase/transportLayer";
 import Modal from "../../Modal/Modal";
 import "./table.css";
-interface User {
-  description: string;
-  password: string;
-  fullname: string;
-  id?: string;
-}
 
 const Table = () => {
   const [users, setUsers] = useState<User[]>([]);
