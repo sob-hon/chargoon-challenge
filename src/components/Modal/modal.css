@@ -119,3 +119,12 @@
 #cancelBtn {
   background-color: crimson;
 }
+
+.notSelectedUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  margin-top: 20%;
+  color: darkred;
+}

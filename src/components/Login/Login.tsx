@@ -1,8 +1,8 @@
-import React, { FormEvent, useEffect, useLayoutEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { getData } from "../../firebase/transportLayer";
 import { useNavigate } from "react-router-dom";
-import "./login.css";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import "./login.css";
 interface User {
   description: string;
   password: string;
@@ -30,7 +30,6 @@ const Login = () => {
     let authenticated = users.find(
       (user) => user.fullname === userName && user.password === password
     );
-    console.log("state of user", authenticated);
     if (authenticated !== undefined) {
       navigate("/");
       setToken(authenticated.id);
