@@ -73,7 +73,7 @@ const Table: React.FC<Props> = ({
             <tr>
               {headers.map((header) =>
                 filteredHeaders.some((head) => head === header) ? (
-                  <th onClick={nameSortClickedHandler}>
+                  <th key={header} onClick={nameSortClickedHandler}>
                     {header}
                     <div className={`arrow-icon ${arrow ? "" : "open"}`}>
                       <span className="left-bar"></span>

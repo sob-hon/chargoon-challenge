@@ -34,7 +34,7 @@ const AutoComplete: React.FC<Pros> = ({ options }) => {
             opt.fullname.toLowerCase().includes(debouncedValue.toLowerCase())
           )
           .map((opt) => (
-            <li className="autocomplete-item">{opt.fullname}</li>
+            <li className="autocomplete-item" key={opt.id}>{opt.fullname}</li>
           ))}
       </ul>
     </div>
