@@ -15,6 +15,10 @@ const AutoComplete: React.FC<Pros> = ({ options }) => {
     setSearchValue(event.target.value);
   };
 
+  const autocompleteValueSelected = (fullname: string) => {
+    setSearchValue(fullname);
+  };
+
   console.log("Debounced value is: ", debouncedValue);
 
   return (
@@ -34,7 +38,13 @@ const AutoComplete: React.FC<Pros> = ({ options }) => {
             opt.fullname.toLowerCase().includes(debouncedValue.toLowerCase())
           )
           .map((opt) => (
-            <li className="autocomplete-item" key={opt.id}>{opt.fullname}</li>
+            <li
+              className="autocomplete-item"
+              key={opt.id}
+              onClick={() => autocompleteValueSelected(opt.fullname)}
+            >
+              {opt.fullname}
+            </li>
           ))}
       </ul>
     </div>
