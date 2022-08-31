@@ -22,62 +22,61 @@ const AddUser: React.FC<IProps> = ({ setModalOpen, setUsers }) => {
     setLoading(true);
     await insertData(addedUser);
     setLoading(false);
-    getData().then((data: any) => setUsers(data));
+    const data: any = await getData();
+    setUsers(data);
     setModalOpen(false);
   };
 
   return (
-
+    <>
+      <div className="body">
         <>
-          <div className="body">
-            <>
-              <div className="fullname-wrapper">
-                <h2>fullname</h2>
-                <input
-                  className="input-text"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                />
-              </div>
-
-              <div className="password-wrapper">
-                <h2>password</h2>
-                <input
-                  className="input-text"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-
-              <div className="description-wrapper">
-                <h2>description</h2>
-                <textarea
-                  className="input-text"
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-            </>
+          <div className="fullname-wrapper">
+            <h2>fullname</h2>
+            <input
+              className="input-text"
+              required
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+            />
           </div>
-          <div className="footer">
-            <button onClick={saveBtnClickedHandler}>
-              {loading ? "Loading..." : "Save"}
-            </button>
-            <button
-              onClick={() => {
-                setModalOpen(false);
-              }}
-              id="cancelBtn"
-            >
-              Close
-            </button>
+
+          <div className="password-wrapper">
+            <h2>password</h2>
+            <input
+              className="input-text"
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className="description-wrapper">
+            <h2>description</h2>
+            <textarea
+              className="input-text"
+              required
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
         </>
-
+      </div>
+      <div className="footer">
+        <button onClick={saveBtnClickedHandler}>
+          {loading ? "Loading..." : "Save"}
+        </button>
+        <button
+          onClick={() => {
+            setModalOpen(false);
+          }}
+          id="cancelBtn"
+        >
+          Close
+        </button>
+      </div>
+    </>
   );
 };
 
