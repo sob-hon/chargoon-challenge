@@ -1,0 +1,130 @@
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modalContainer {
+  width: 500px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.modal-btn {
+  width: 50px;
+}
+
+.modalContainer .title {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modalContainer .body {
+  margin-left: 10%;
+  width: 100%;
+  flex: 50%;
+  align-items: baseline;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.fullname-wrapper {
+  display: flex;
+  gap: 60px;
+}
+
+.fullname-content {
+  min-width: 50%;
+  margin-top: 5px;
+  word-break: break-all;
+  max-width: 60%;
+  text-align: left;
+}
+
+.password-wrapper,
+.description-wrapper {
+  margin-top: 20px;
+  display: flex;
+  gap: 35px;
+  text-align: left;
+}
+
+.input-text {
+  outline: none;
+  border: 0.2px solid black;
+  border-radius: 15px;
+  padding-inline: 20px;
+  color: rgba(0, 0, 0, 0.651);
+}
+
+.description-wrapper .input-text{
+  height: 80px;
+  width: 45%;
+  padding-block: 5px;
+}
+
+.password-wrapper {
+  gap: 50px;
+}
+
+.description-content {
+  margin-top: 7px;
+  word-break: break-all;
+  max-width: 60%;
+}
+
+.modalContainer .footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer .footer button {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background-color: crimson;
+}
+
+.notSelectedUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  margin-top: 20%;
+  color: darkred;
+}
