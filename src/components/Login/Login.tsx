@@ -20,7 +20,7 @@ const Login = () => {
   console.log(users);
 
   useEffect(() => {
-    if (!window.localStorage.getItem("token")) {
+    if (!token) {
       getData().then((data: any) => setUsers(data));
     } else navigate("/");
   }, []);

@@ -1,5 +1,6 @@
 import React, { SetStateAction, useState } from "react";
 import { getData, insertData, User } from "../../firebase/transportLayer";
+import Loading from "../Loading/Loading";
 import "./modal.css";
 
 interface Props {
@@ -18,14 +19,17 @@ const Modal: React.FC<Props> = ({
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const saveBtnClickedHandler = () => {
+  const saveBtnClickedHandler = async () => {
     let addedUser: User = {
       description,
       password,
       fullname: fullName,
     };
-    insertData(addedUser);
+    setLoading(true);
+    await insertData(addedUser);
+    setLoading(false);
     getData().then((data: any) => setUsers(data));
     setModalOpen(false);
   };
@@ -99,7 +103,9 @@ const Modal: React.FC<Props> = ({
             </div>
             <div className="footer">
               {modalType === "add" ? (
-                <button onClick={saveBtnClickedHandler}>Save</button>
+                <button onClick={saveBtnClickedHandler}>
+                  {loading ? "Loading..." : "Save"}
+                </button>
               ) : (
                 ""
               )}

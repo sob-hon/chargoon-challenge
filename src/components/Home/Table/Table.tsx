@@ -54,6 +54,7 @@ const Table: React.FC<Props> = ({
         return prevUsers.filter((user) => user.id !== selectedUser.id);
       });
       deleteData(selectedUser?.id);
+      setSelectedUser("");
     }
   };
 
