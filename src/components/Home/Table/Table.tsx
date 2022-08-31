@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { deleteData, User } from "../../../firebase/transportLayer";
+import AddUser from "../../AddUser/AddUser";
 import Modal from "../../Modal/Modal";
+import ViewUser from "../../ViewUser/ViewUser";
 import "./table.css";
 
 interface Props {
@@ -54,19 +56,32 @@ const Table: React.FC<Props> = ({
         return prevUsers.filter((user) => user.id !== selectedUser.id);
       });
       deleteData(selectedUser?.id);
-      setSelectedUser("");
+      setSelectedUser(undefined);
     }
   };
 
   return (
     <>
-      {modalOpen && (
+      {modalOpen === true && modalType === "view" ? (
         <Modal
           setModalOpen={setModalOpen}
-          modalType={modalType}
-          selectedUser={selectedUser}
-          setUsers={setRows}
+          title="View User"
+          body={
+            <ViewUser setModalOpen={setModalOpen} selectedUser={selectedUser} />
+          }
         />
+      ) : (
+        ""
+      )}
+
+      {modalOpen === true && modalType === "add" ? (
+        <Modal
+          setModalOpen={setModalOpen}
+          title="Add User"
+          body={<AddUser setModalOpen={setModalOpen} setUsers={setRows} />}
+        />
+      ) : (
+        ""
       )}
       <div className="table-container">
         <table>

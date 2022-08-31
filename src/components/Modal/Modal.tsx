@@ -4,35 +4,11 @@ import "./modal.css";
 
 interface Props {
   setModalOpen: (value: boolean) => void;
-  modalType: string;
-  selectedUser: User | undefined;
-  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+  title: string;
+  body: React.ReactNode;
 }
 
-const Modal: React.FC<Props> = ({
-  setModalOpen,
-  modalType,
-  selectedUser,
-  setUsers,
-}) => {
-  const [fullName, setFullName] = useState("");
-  const [password, setPassword] = useState("");
-  const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const saveBtnClickedHandler = async () => {
-    let addedUser: User = {
-      description,
-      password,
-      fullname: fullName,
-    };
-    setLoading(true);
-    await insertData(addedUser);
-    setLoading(false);
-    getData().then((data: any) => setUsers(data));
-    setModalOpen(false);
-  };
-
+const Modal: React.FC<Props> = ({ setModalOpen, title, body }) => {
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -47,73 +23,9 @@ const Modal: React.FC<Props> = ({
           </button>
         </div>
         <div className="title">
-          <h1>{modalType === "view" ? "View" : "Add"} User</h1>
+          <h1>{title}</h1>
         </div>
-        <div className="body">
-          <>
-            <div className="fullname-wrapper">
-              <h2>fullname</h2>
-              {modalType === "view" ? (
-                <p className="fullname-content">{selectedUser?.fullname}</p>
-              ) : (
-                <input
-                  className="input-text"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                />
-              )}
-            </div>
-
-            {modalType === "add" ? (
-              <div className="password-wrapper">
-                <h2>password</h2>
-                <input
-                  className="input-text"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            ) : (
-              ""
-            )}
-
-            <div className="description-wrapper">
-              <h2>description</h2>
-              {modalType === "view" ? (
-                <p className="description-content">
-                  {selectedUser?.description}
-                </p>
-              ) : (
-                <textarea
-                  className="input-text"
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              )}
-            </div>
-          </>
-        </div>
-        <div className="footer">
-          {modalType === "add" ? (
-            <button onClick={saveBtnClickedHandler}>
-              {loading ? "Loading..." : "Save"}
-            </button>
-          ) : (
-            ""
-          )}
-          <button
-            onClick={() => {
-              setModalOpen(false);
-            }}
-            id="cancelBtn"
-          >
-            Close
-          </button>
-        </div>
+        {body}
       </div>
     </div>
   );
