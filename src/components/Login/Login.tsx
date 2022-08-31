@@ -1,4 +1,10 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, {
+  FormEvent,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { getData } from "../../firebase/transportLayer";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -11,8 +17,8 @@ interface User {
 }
 
 const Login = () => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const userNameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [users, setUsers] = useState<User[]>([]);
   const [token, setToken] = useLocalStorage<string>("token", "");
   const navigate = useNavigate();
@@ -28,7 +34,9 @@ const Login = () => {
   const loginFormSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let authenticated = users.find(
-      (user) => user.fullname === userName && user.password === password
+      (user) =>
+        user.fullname === userNameRef.current?.value &&
+        user.password === passwordRef.current?.value
     );
     if (authenticated !== undefined) {
       navigate("/");
@@ -44,11 +52,10 @@ const Login = () => {
           <div className="user-input-wrp">
             <br />
             <input
+              ref={userNameRef}
               type="text"
               className="inputText"
               required
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
             />
             <label className="floating-label">Your username</label>
           </div>
@@ -56,11 +63,10 @@ const Login = () => {
           <div className="user-input-wrp">
             <br />
             <input
+              ref={passwordRef}
               type="password"
               className="inputText"
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
             />
             <label className="floating-label">Your password</label>
           </div>
