@@ -11,17 +11,21 @@ const ViewUser: React.FC<IProps> = ({ setModalOpen, selectedUser }) => {
   return (
     <>
       <div className="body">
-        <>
-          <div className="fullname-wrapper">
-            <h2>fullname</h2>
-            <p className="fullname-content">{selectedUser?.fullname}</p>
-          </div>
+        {!selectedUser ? (
+          <p className="not-selected">Please select a user first</p>
+        ) : (
+          <>
+            <div className="fullname-wrapper">
+              <h2>fullname</h2>
+              <p className="fullname-content">{selectedUser?.fullname}</p>
+            </div>
 
-          <div className="description-wrapper">
-            <h2>description</h2>
-            <p className="description-content">{selectedUser?.description}</p>
-          </div>
-        </>
+            <div className="description-wrapper">
+              <h2>description</h2>
+              <p className="description-content">{selectedUser?.description}</p>
+            </div>
+          </>
+        )}
       </div>
       <div className="footer">
         <button

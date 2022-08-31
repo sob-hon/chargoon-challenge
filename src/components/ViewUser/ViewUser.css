@@ -81,7 +81,7 @@
   color: rgba(0, 0, 0, 0.651);
 }
 
-.description-wrapper .input-text{
+.description-wrapper .input-text {
   height: 80px;
   width: 45%;
   padding-block: 5px;
@@ -127,4 +127,13 @@
   font-size: 30px;
   margin-top: 20%;
   color: darkred;
+}
+
+.not-selected {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: crimson;
+  font-size: 25px;
 }
